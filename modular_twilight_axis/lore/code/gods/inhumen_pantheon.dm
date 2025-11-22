@@ -197,12 +197,12 @@
 /////////////////////////////////
 
 /datum/patron/proc/can_pray_inhumen(mob/living/follower)
-	SHOULD_CALL_PARENT(TRUE)
 	// Allows death-bed prayers
 	if(follower.has_status_effect(STATUS_EFFECT_UNCONSCIOUS))
 		if(follower.has_status_effect(STATUS_EFFECT_SLEEPING))
 			to_chat(follower, span_danger("I mustn't be sleeping to pray!"))
 			return FALSE	//Stops praying just by sleeping.
+	SHOULD_CALL_PARENT(TRUE)
 	. = TRUE
 
 // Graggar - When bleeding, near blood on ground, zchurch, bad-cross, or ritual chalk
@@ -240,10 +240,8 @@
 			to_chat(follower, span_danger("That acursed cross interupts my prayers!"))
 			return FALSE
 	for(var/mob/living/carbon/human/comrade in view(4, get_turf(follower)))
-		if(istype(comrade.patron, /datum/patron/inhumen/matthios) && comrade != follower)
+		if(istype(comrade.patron, /datum/patron/inhumen/matthios))
 			return TRUE
-	for(var/obj/structure/ritualcircle/matthios in view(1, get_turf(follower)))
-		return TRUE
 	to_chat(follower, span_danger("Matthios will hear any prayer I offer, so long as I have at least one comrade near me!"))
 	return FALSE
 
@@ -267,9 +265,7 @@
 	if(follower.has_status_effect(/datum/status_effect/mood/vgood))
 		return TRUE
 	// Allows prayers during sex
-	var/list/arousal_data = list()
-	SEND_SIGNAL(follower, COMSIG_SEX_GET_AROUSAL, arousal_data)
-	if(arousal_data["arousal"] >= 10)
+	if(follower.sexcon.arousal >= 10)
 		return TRUE
 	// Allows praying atop ritual chalk of the god.
 	for(var/obj/structure/ritualcircle/baotha in view(1, get_turf(follower)))
