@@ -1364,7 +1364,7 @@
 		if("Defenestration")
 			if(!do_after(user, 5 SECONDS))
 				return
-			user.say("Father of freedom, pay heed to our litany!!") //TA Lore edit
+			user.say("Father of freedon, pay heed to our litany!!") //TA Lore edit
 			if(!do_after(user, 5 SECONDS))
 				return
 			user.say("To thou we offer - a scion of tyranny!!") //TA Lore edit
@@ -1383,7 +1383,7 @@
 				icon_state = "matthios_chalky"
 
 /obj/structure/ritualcircle/matthios/proc/matthiosarmaments(mob/living/carbon/human/target)
-	if(!HAS_TRAIT(target, TRAIT_FREEMAN))
+	if(!HAS_TRAIT(target, TRAIT_COMMIE))
 		loc.visible_message(span_cult("THE RITE REJECTS ONES WHO BOW DOWN TO TYRANNY!!")) //TA Lore edit
 		return
 	target.Stun(60)
