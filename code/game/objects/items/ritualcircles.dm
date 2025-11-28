@@ -1689,8 +1689,16 @@
 	loc.visible_message(span_cultsmall("[weapon] flares with a cold glimmer, having absorbed the sacrifice! [user] appears visibly drained and cold."))
 	playsound(loc, 'sound/magic/churn.ogg', 100, FALSE, -1)
 
-	CP.try_bless(BLESSING_PSYDONIAN)
-	new /obj/effect/temp_visual/censer_dust(get_turf(loc))
+	weapon.AddComponent(\
+        /datum/component/silverbless,\
+        pre_blessed = BLESSING_PSYDONIAN,\
+        silver_type = SILVER_PSYDONIAN,\
+        added_force = 5,\
+        added_blade_int = 0,\
+        added_int = 50,\
+        added_def = 2,\
+    )
+	weapon.is_silver = TRUE
 
 	user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
 	user.apply_status_effect(/datum/status_effect/debuff/devitalised/lesser)
